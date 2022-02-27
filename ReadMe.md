@@ -12,6 +12,12 @@
 2. [X] Add users
 3. [X] Update users
 4. [X] Delete users
+5. [X] Pagination
+    * Paginaion number
+    * Each page have predefined number of tables
+    * Pagination page dynamic
+    * Previous and Next button functional
+6. [X] 
 
 
 ### Frontend

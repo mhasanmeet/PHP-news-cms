@@ -11,8 +11,22 @@
               <div class="col-md-12">
                 <?php 
                     include "config.php";
-                    $sql_query = "SELECT * from user ORDER BY user_id DESC";
-                    $result = mysqli_query($conn, $sql_query) or die("Connection failed" . mysqli_connect_error);
+                    
+                    // Pagination code Start here // Part --2
+                    $limit = 3;
+
+                    if(isset($_GET['page'])){
+                        $page = $_GET['page'];
+                    }
+                    else{
+                        $page = 1;
+                    }
+
+                    $offset = ($page - 1) * $limit;
+                    // Pagination code end here // Part --2
+
+                    $sql_query = "SELECT * from user ORDER BY user_id DESC LIMIT {$offset}, {$limit}";
+                    $result = mysqli_query($conn, $sql_query) or die("Connection failed");
                     if(mysqli_num_rows($result) > 0){
                 ?>
                   <table class="content-table">
@@ -48,11 +62,43 @@
                       </tbody>
                   </table>
                   
-                  <ul class='pagination admin-pagination'>
-                      <li class="active"><a>1</a></li>
-                      <li><a>2</a></li>
-                      <li><a>3</a></li>
-                  </ul>
+                    <!-- Pagination code Start here // Part --1 -->
+                    <?php 
+                        $sql_users = "SELECT * from user";
+                        $sql_users_query = mysqli_query($conn, $sql_users) or die ("Query Failed");
+
+                        if(mysqli_num_rows($sql_users_query) > 0){
+                            $total_records =  mysqli_num_rows($sql_users_query);
+                            $limit = 3;
+                            $total_pages = ceil($total_records / $limit);
+
+                            echo '<ul class="pagination admin-pagination">';
+
+                            if($page > 1){
+                                echo '<li><a href="users.php?page='.($page-1).'">Prev</a></li>';
+                            }
+
+                            for($i = 1; $i<=$total_pages; $i++){
+
+                                //Active page code here
+                                if($i == $page){
+                                    $active = "active";
+                                }
+                                else{
+                                    $active = "";
+                                }
+                                echo '<li class="'. $active .'"><a href="users.php?page='.$i.'">'.$i.'</a></li>'; 
+                            }
+
+                            if($total_pages > $page){
+                                echo '<li><a href="users.php?page='.($page+1).'">Next</a></li>';
+                            }
+
+                            echo "</ul>";
+                        }
+                    ?>
+                    <!-- Pagination code end here // Part --1 -->
+
                 <?php 
                     }
                 ?>
