@@ -26,6 +26,11 @@
 9. [X] Roll based content show
     * If user is admin then show all the content and if not then don't
 10. [X] Fetch username in the top bar of the current user 
+11. [X] Fetch username in the top bar of the current user 
+12. [X] Fatch category in **Add Post section**
+13. [X] Save Post
+14. [X] File upload into Database
+15. [X] File size, Format, upload size, extensions updated
 
 
 
