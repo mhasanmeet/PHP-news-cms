@@ -33,7 +33,8 @@
 15. [X] File size, Format, upload size, extensions updated
 
 
-
-
-
 ### Frontend
+
+### ISSES
+
+1. ❓ Category ID number is not fetch issue
