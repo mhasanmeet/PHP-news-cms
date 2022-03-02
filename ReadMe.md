@@ -31,10 +31,11 @@
 13. [X] Save Post
 14. [X] File upload into Database
 15. [X] File size, Format, upload size, extensions updated
+16. [X] User roll based post show on Dashboard, if Admin show all post if normal user then show only user post
+17. [X] Update & Delete post
+    * Update image file
 
 
 ### Frontend
 
 ### ISSES
-
-1. ❓ Category ID number is not fetch issue

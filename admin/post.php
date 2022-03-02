@@ -25,11 +25,24 @@
                     $offset = ($page - 1) * $limit;
                     // Pagination code end here // Part --2
 
-                    $sql_query = "SELECT * from post 
-                                  LEFT JOIN category ON post.category = category.category_id 
-                                  LEFT JOIN user ON post.author = user.user_id
-                                  ORDER BY post.post_id
-                                  DESC LIMIT {$offset}, {$limit}";
+                    // session and user role based show post
+                    if($_SESSION["user_role"] == "1"){
+                        $sql_query = "SELECT post.post_id, post.title, post.description, post.post_date,
+                        category.category_name, user.username FROM post 
+                          LEFT JOIN category ON post.category = category.category_id 
+                          LEFT JOIN user ON post.author = user.user_id
+                          ORDER BY post.post_id
+                          DESC LIMIT {$offset}, {$limit}"; 
+                    }
+                    elseif($_SESSION["user_role"] == "0"){
+                        $sql_query = "SELECT post.post_id, post.title, post.description, post.post_date,
+                        category.category_name, user.username FROM post 
+                          LEFT JOIN category ON post.category = category.category_id 
+                          LEFT JOIN user ON post.author = user.user_id
+                          WHERE post.author = {$_SESSION['user_id']}
+                          ORDER BY post.post_id
+                          DESC LIMIT {$offset}, {$limit}";
+                    }
                     $result = mysqli_query($conn, $sql_query) or die("Connection failed");
                     if(mysqli_num_rows($result) > 0){
                   ?>
@@ -62,12 +75,11 @@
 
                     <!-- Pagination code Start here // Part --1 -->
                     <?php 
-                        $sql_post = "SELECT * from post";
+                        $sql_post = "SELECT * FROM post";
                         $sql_post_query = mysqli_query($conn, $sql_post) or die ("Query Failed");
 
                         if(mysqli_num_rows($sql_post_query) > 0){
                             $total_records =  mysqli_num_rows($sql_post_query);
-                            $limit = 3;
                             $total_pages = ceil($total_records / $limit);
 
                             echo '<ul class="pagination admin-pagination">';
