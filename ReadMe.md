@@ -35,7 +35,8 @@
 17. [X] Update & Delete post
     * Update image file
 18. [X] Category Section completed 
-    * Update category 
+    * Update category
+    * Delete category
     
 
 
