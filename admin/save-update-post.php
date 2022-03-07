@@ -1,32 +1,32 @@
 <?php
     include "config.php";
 
-    if(empty($_FILES['new-images']['name'])){
+    if(empty($_FILES['new-image']['name'])){
         $image_name = $_POST['old_image'];
     }
     else{
         $errors = array();
         
-        $image_name = $_FILES['fileToUpload']['name'];
-        $file_size = $_FILES['fileToUpload']['size'];
-        $file_tmp = $_FILES['fileToUpload']['tmp_name'];
-        $file_type = $_FILES['fileToUpload']['type'];
-        $file_ext =  strtolower(end(explode('.', $file_name)));
+        $image_name = $_FILES['new-image']['name'];
+        $image_size = $_FILES['new-image']['size'];
+        $image_tmp = $_FILES['new-image']['tmp_name'];
+        $image_type = $_FILES['new-image']['type'];
+        $image_ext =  end(explode('.', $image_name));
         $extensions = array("jpeg", "jpg", "png");
 
         // Check required file extensions
-        if(in_array($file_ext, $extensions) === flase){
+        if(in_array($image_ext, $extensions) === false){
             $errors[] = "This extension file is not allowed, Please choose a JPG or PNG file";
         }
 
         // Check file size
-        if($file_size > 2097152){
+        if($image_size > 2097152){
             $errors[] = "File size must be 2MB or lower than 2MB";
         }
 
         // if there is no error then upload file into database
         if(empty($errors) == true){
-            move_uploaded_file($file_tmp, "upload/" . $file_name);
+            move_uploaded_file($image_tmp, "upload/" . $image_name);
         }
         else{
             print_r($errors);
