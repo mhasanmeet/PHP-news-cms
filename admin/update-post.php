@@ -10,7 +10,7 @@
         <?php
             include "config.php";
             $post_id = $_GET['id'];
-            $sql_query = "SELECT post.post_id, post.title, post.description, category.category_name, post.post_img FROM post 
+            $sql_query = "SELECT post.post_id, post.title, post.description, category.category_name, post.post_img, post.category FROM post 
                           LEFT JOIN category ON post.category = category.category_id 
                           LEFT JOIN user ON post.author = user.user_id
                           WHERE post.post_id = {$post_id}";
@@ -20,7 +20,7 @@
                 while ($row = mysqli_fetch_assoc($result)){
         ?>
         <!-- Form for show edit-->
-        <form action="" method="POST" enctype="multipart/form-data" autocomplete="off">
+        <form action="save-update-post.php" method="POST" enctype="multipart/form-data" autocomplete="off">
             <div class="form-group">
                 <input type="hidden" name="post_id"  class="form-control" value="<?php echo $row['post_id']; ?>" placeholder="">
             </div>
@@ -40,13 +40,20 @@
                     <option disabled>Select Option</option>
                     <?php
                         include "config.php";
-                        $sql_category = "SELECT * FROM category";
+                        $cat_sql = "SELECT * FROM category";
+                        
+                        $cat_sql_fetch = mysqli_query($conn, $cat_sql) or die("Connection Error");
 
-                        $category_SQL = mysqli_query($conn, $sql_category) or die ("Connection Error");
-
-                        if(mysqli_num_rows($category_SQL) > 0){
-                            while($row = mysqli_fetch_assoc($category_SQL)){
-                                echo "<option value='{$row['category_id']}'>{$row['category_name']}</option>";
+                        if(mysqli_num_rows($cat_sql_fetch) > 0){
+                            while($cat_row = mysqli_fetch_assoc($cat_sql_fetch)){
+                                // Default category selection
+                                if($row['category'] == $cat_row['category_id']){
+                                    $selected = "selected";
+                                }
+                                else{
+                                    $selected = "";
+                                }
+                                echo "<option {$selected} value ='{$cat_row['category_id']}'>{$cat_row['category_name'] }</option>";
                             }
                         }
                     ?>
@@ -56,7 +63,7 @@
                 <label for="">Post image</label>
                 <input type="file" name="new-image">
                 <img  src="upload/<?php echo $row['post_img']; ?>" height="150px">
-                <input type="hidden" name="old-image" value="">
+                <input type="hidden" name="old_image" value="<?php echo $row['post_img']; ?>">
             </div>
             <input type="submit" name="submit" class="btn btn-primary" value="Update" />
         </form>
