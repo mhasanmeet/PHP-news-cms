@@ -37,7 +37,7 @@
 18. [X] Category Section completed 
     * Update category
     * Delete category
-    
+19. [X] Image delete from folder (unlink)    
 
 
 ### Frontend
