@@ -37,9 +37,15 @@
 18. [X] Category Section completed 
     * Update category
     * Delete category
-19. [X] Image delete from folder (unlink)    
+19. [X] Image delete from folder (unlink)  
+20. [X] Put **Index.php** files in the image folder for prevent images files from outside unrecognize access.
 
 
 ### Frontend
+1. [x] Index.php full functional
+    * fetch data of Image, Date, Category Name, Title
+    * Add **substr** for see more 
+2. [x] Single.php full functional
+
 
 ### ISSES
