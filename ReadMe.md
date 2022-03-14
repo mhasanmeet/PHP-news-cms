@@ -34,7 +34,8 @@
 16. [X] User roll based post show on Dashboard, if Admin show all post if normal user then show only user post
 17. [X] Update & Delete post
     * Update image file
-18. [X] Category Section completed 
+18. [X] Category Section completed
+    * Add Category
     * Update category
     * Delete category
 19. [X] Image delete from folder (unlink)  
