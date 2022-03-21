@@ -45,8 +45,10 @@
 ### Frontend
 1. [x] Index.php full functional
     * fetch data of Image, Date, Category Name, Title
-    * Add **substr** for see more 
+    * Add php **substr** method for see more 
+    * Add pagination
 2. [x] Single.php full functional
+3. [x] Header Category menu dynamic functional
 
 
 ### ISSES
